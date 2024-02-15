@@ -1,0 +1,82 @@
+body, h1, h2, p {
+    margin: 0;
+}
+
+body {
+    font-family: 'Pretendard JP', 'Pretendard', sans-serif;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+.main-container {
+    margin: auto;
+    max-width: 512px;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.logo-area {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.word-area {
+    margin: auto;
+}
+
+.word {
+    margin: auto;
+    display: flex;
+}
+
+.letter {
+    font-size: 1.8rem;
+    width: 3rem;
+    height: 3rem;
+    border: 2px #ddd solid;
+    margin: 0.2rem;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.correct {
+    background-color: rgb(15, 185, 129);
+    border-color: rgb(15, 185, 129);
+    color: white;
+}
+
+.exist {
+    background-color: rgb(245, 158, 10);
+    border-color: rgb(245, 158, 10);
+    color: white;
+}
+
+.wrong {
+    background-color: rgb(106, 114, 127);
+    border-color: rgb(106, 114, 127);
+    color: white;
+}
+
+.keyboard-area {
+    border-top: 1px solid #ddd;
+    min-height: 10rem;
+    padding-top: 1rem;
+}
+
+.keyboard-area button {
+    border: none;
+    border-radius: 2px;
+    margin: 1px;
+    height: 2rem;
+}
+
+.key-area button {
+    width: 1.5rem;
+}
