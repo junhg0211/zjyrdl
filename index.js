@@ -27,6 +27,10 @@ function pressButton(of) {
 }
 
 function backspace() {
+    if (!enable) {
+        return;
+    }
+
     wordDiv = wordArea.children[nowWordIndex];
 
     letterSpan = wordDiv.children[inputWord.length - 1];
@@ -39,6 +43,10 @@ function backspace() {
 }
 
 function enter() {
+    if (!enable) {
+        return;
+    }
+
     // if word length is 5
     if (inputWord.length !== 5) {
         return;
