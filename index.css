@@ -68,6 +68,7 @@ body {
     border-top: 1px solid #ddd;
     min-height: 10rem;
     padding-top: 1rem;
+    text-align: center;
 }
 
 .keyboard-area button {

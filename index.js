@@ -6,8 +6,9 @@ let wordArea;
 let enable = true;
 
 const letters = [
-    'A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-    'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z', 'Ä', 'Ë', 'Ï', 'Ö', 'Ü', 'Ÿ'
+    'Q', 'E', 'Ë', 'R', 'T', 'Y', 'Ÿ', 'U', 'Ü', 'I', 'Ï', 'O', 'Ö', 'P', '',
+    'A', 'Ä', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', '',
+    'Z', 'X', 'C', 'Ç', 'V', 'N', 'M'
 ];
 
 let words = new Set();
@@ -102,6 +103,12 @@ function enter() {
 document.addEventListener('DOMContentLoaded', () => {
     keyboardArea = document.querySelector('#keyboard-area');
     letters.forEach(letter => {
+        if (letter === '') {
+            let br = document.createElement('br');
+            keyboardArea.appendChild(br)
+            return;
+        }
+
         let button = document.createElement('button');
 
         button.innerText = letter.toUpperCase();
@@ -156,6 +163,8 @@ window.addEventListener('keydown', e => {
             letter = 'Ü';
         } else if (letter === 'Y') {
             letter = 'Ÿ';
+        } else if (letter === 'C') {
+            letter = 'Ç';
         }
     }
 
