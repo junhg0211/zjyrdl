@@ -108,6 +108,40 @@ function enter() {
     inputWord = '';
 }
 
+const grey = '⬜';
+const green = '🟩';
+const yellow = '🟨';
+function copy() {
+    let today = new Date();
+    let year = today.getYear() + 1900;
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+    let result = `${year}. ${month}. ${day} Zÿrdl ${nowWordIndex+1}/8\n\n`;
+
+    for (let i = 0; i <= nowWordIndex; i++) {
+        let wordDiv = wordArea.children[i];
+
+        for (let j = 0; j < 5; j++) {
+            let letterSpan = wordDiv.children[j];
+
+            if (letterSpan.classList.contains("correct")) {
+                result += green;
+            } else if (letterSpan.classList.contains("exist")) {
+                result += yellow;
+            } else {
+                result += grey;
+            }
+        }
+
+        result += '\n';
+    }
+
+    result += '\nhttps://me.shtelo.org/zjyrdl';
+
+    // -- copy result
+    navigator.clipboard.writeText(result);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     keyboardArea = document.querySelector('#keyboard-area');
     letters.forEach(letter => {
