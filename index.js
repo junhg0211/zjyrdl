@@ -1,3 +1,10 @@
+let year, month, day;
+
+function setCookie(key, value, expire) {
+    value = encodeURIComponent(value);
+    document.cookie = `${key}=${value}; expires=${expire}; path=/`;
+}
+
 let word;
 
 let keyboardArea;
@@ -70,6 +77,7 @@ function enter() {
         }
     }
 
+    // check corrects
     let corrects = 0;
 
     for (let i = 0; i < 5; i++) {
@@ -84,9 +92,9 @@ function enter() {
 
     if (corrects === 5) {
         enable = false;
-        return;
     }
 
+    // check exists and wrongs
     for (let i = 0; i < 5; i++) {
         let letterSpan = wordDiv.children[i];
 
@@ -104,8 +112,25 @@ function enter() {
         }
     }
 
+    // reset buffer
     nowWordIndex += 1;
     inputWord = '';
+
+    // save cookie
+    let date = new Date(`${year}-${month}-${day}T23:59:59.999`);
+    let wordCookie = '';
+    for (let i = 0; i < nowWordIndex+1; i++) {
+        let wordDiv = wordArea.children[i];
+
+        let word = '';
+        for (let j = 0; j < 5; j++) {
+            word += wordDiv.children[j].innerText;
+        }
+        word += ' ';
+
+        wordCookie += word;
+    }
+    setCookie('words', wordCookie, date);
 }
 
 const grey = '⬜';
@@ -171,12 +196,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // -- set today's word
             let today = new Date();
-            let year = today.getYear();
-            let month = today.getMonth();
-            let day = today.getDay();
+            year = today.getYear();
+            month = today.getMonth();
+            day = today.getDay();
             let seed = (day + 42) * year + (month * 6 + 27);
             word = json[seed % json.length];
+        })
+        .then(() => {
+            // handle cookie
+            document.cookie.split('; ').forEach(cookie => {
+                let [key, value] = cookie.split('=');
+
+                value = decodeURIComponent(value);
+                if (key === 'words') {
+                    for (let i = 0; i < value.length; i++) {
+                        if (value[i] === ' ') {
+                            enter();
+
+                        } else {
+                            pressButton(value[i]);
+                        }
+                    }
+
+                    enter();
+                }
+            });
         });
+
 });
 
 window.addEventListener('keydown', e => {
