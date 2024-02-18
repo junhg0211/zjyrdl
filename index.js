@@ -162,7 +162,7 @@ function enter() {
     }
 
     // save cookie
-    let date = new Date(year, month, day, 23, 59, 59);
+    let date = new Date(year, month-1, day, 23, 59, 59);
     let wordCookie = '';
     for (let i = 0; i < nowWordIndex+1; i++) {
         let wordDiv = wordArea.children[i];
