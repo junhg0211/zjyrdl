@@ -79,6 +79,7 @@ function enter() {
 
     // check corrects
     let corrects = 0;
+    let keyColors = {};
 
     for (let i = 0; i < 5; i++) {
         let letterSpan = wordDiv.children[i];
@@ -87,6 +88,8 @@ function enter() {
             letterSpan.classList.add('correct');
             count[letterSpan.innerText] -= 1;
             corrects += 1;
+
+            keyColors[word[i]] = 'correct';
         }
     }
 
@@ -107,14 +110,56 @@ function enter() {
                 && count[letterSpan.innerText] > 0) {
             letterSpan.classList.add('exist');
             count[letterSpan.innerText] -= 1;
+
+            if (keyColors[letterSpan.innerText] === undefined) {
+                keyColors[letterSpan.innerText] = 'exist';
+            }
         } else {
             letterSpan.classList.add('wrong');
+            if (keyColors[letterSpan.innerText] === undefined) {
+                keyColors[letterSpan.innerText] = 'wrong';
+            }
         }
     }
 
     // reset buffer
     nowWordIndex += 1;
     inputWord = '';
+
+    // change key color
+    for (let i = 0; i < keyboardArea.children.length; i++) {
+        let child = keyboardArea.children[i];
+
+        if (keyColors[child.innerText] === undefined) {
+            continue;
+        }
+
+        if (keyColors[child.innerText] === 'correct') {
+            child.classList.remove('wrong');
+            child.classList.remove('exist');
+            child.classList.add('correct');
+            continue;
+        }
+
+        if (keyColors[child.innerText] === 'exist') {
+            if (child.classList.contains('correct')) {
+                continue;
+            }
+
+            child.classList.remove('wrong');
+            child.classList.add('exist');
+            continue;
+        }
+
+        if (keyColors[child.innerText] === 'wrong') {
+            if (child.classList.contains('correct')
+                || child.classList.contains('exist')) {
+                continue;
+            }
+
+            child.classList.add('wrong');
+        }
+    }
 
     // save cookie
     let date = new Date(year, month, day, 23, 59, 59);
