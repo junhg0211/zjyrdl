@@ -117,7 +117,7 @@ function enter() {
     inputWord = '';
 
     // save cookie
-    let date = new Date(`${year}-${month}-${day}T23:59:59.999`);
+    let date = new Date(year, month, day, 23, 59, 59);
     let wordCookie = '';
     for (let i = 0; i < nowWordIndex+1; i++) {
         let wordDiv = wordArea.children[i];
@@ -196,9 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // -- set today's word
             let today = new Date();
-            year = today.getYear();
-            month = today.getMonth();
-            day = today.getDay();
+            year = today.getYear() + 1900;
+            month = today.getMonth() + 1;
+            day = today.getDate();
             let seed = (day + 42) * year + (month * 6 + 27);
             word = json[seed % json.length];
         })
