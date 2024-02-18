@@ -141,9 +141,9 @@ function copy() {
     let year = today.getYear() + 1900;
     let month = today.getMonth() + 1;
     let day = today.getDate();
-    let result = `${year}. ${month}. ${day} Zÿrdl ${nowWordIndex+1}/8\n\n`;
+    let result = `${year}. ${month}. ${day} Zÿrdl ${nowWordIndex}/8\n\n`;
 
-    for (let i = 0; i <= nowWordIndex; i++) {
+    for (let i = 0; i < nowWordIndex; i++) {
         let wordDiv = wordArea.children[i];
 
         for (let j = 0; j < 5; j++) {
