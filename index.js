@@ -9,6 +9,9 @@ let word;
 
 let keyboardArea;
 let wordArea;
+let notificationDiv;
+let notificationTitle;
+let notificationContent;
 
 let enable = true;
 
@@ -61,6 +64,7 @@ function enter() {
 
     // if word in dictionary
     if (!words.has(inputWord)) {
+        notify('Rardéÿrgo', "Ä Ÿrgo d'iksàhum uä Vapy.")
         return;
     }
 
@@ -210,6 +214,9 @@ function copy() {
 
     // -- copy result
     navigator.clipboard.writeText(result);
+
+    // -- notification
+    notify('Sipotaè', "Exitnatanil sipotaè.")
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -268,6 +275,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+    notificationDiv = document.querySelector('#notification');
+    notificationTitle = document.querySelector('#notification-title');
+    notificationContent = document.querySelector('#notification-content');
 });
 
 window.addEventListener('keydown', e => {
@@ -307,3 +317,22 @@ window.addEventListener('keydown', e => {
 
     pressButton(letter);
 });
+
+function notify(title, content) {
+    // set title and content
+    notificationTitle.innerText = title;
+
+    notificationContent.innerHTML = '';
+    content.split('\n').forEach(paragraph => {
+        let p = document.createElement('p');
+        p.innerText = paragraph;
+        notificationDiv.appendChild(p);
+    });
+
+    // show
+    notificationDiv.classList.add('notification-show');
+
+    setTimeout(() => {
+        notificationDiv.classList.remove('notification-show');
+    }, 2000);
+}

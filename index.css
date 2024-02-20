@@ -71,13 +71,41 @@ body {
     text-align: center;
 }
 
-.keyboard-area button {
+button {
     border: none;
     border-radius: 2px;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+}
+
+.keyboard-area button {
     margin: 1px;
+    padding: 0;
     height: 2rem;
 }
 
 .key-area button {
     width: 1.5rem;
+}
+
+.notification {
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: #0004 0 0 1rem;
+    opacity: 0;
+    display: none;
+}
+
+.notification-show {
+    display: block;
+    opacity: 100%;
+}
+
+.notification h2 {
+    margin-bottom: 1rem;
 }
