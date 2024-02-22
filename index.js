@@ -326,7 +326,7 @@ function notify(title, content) {
     content.split('\n').forEach(paragraph => {
         let p = document.createElement('p');
         p.innerText = paragraph;
-        notificationDiv.appendChild(p);
+        notificationContent.appendChild(p);
     });
 
     // show
